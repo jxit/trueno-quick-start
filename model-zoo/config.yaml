@@ -1,0 +1,47 @@
+backend:
+  preheat: 
+  storage: /jxserving/storage
+ext:
+  backend:
+    rknn: macro.offload
+  gates:
+    on_grpc: True
+    on_multiple_mode: True
+    on_restful: True
+    on_mqtt: True
+    on_sandbox: False
+  outlet:
+    redis: macro.offload
+  plugins:
+    soft-gst: macro.offload
+  work:
+    stream-work: macro.offload
+lmt:
+  max_backend_count: 1
+  max_batchsize: 1000
+  max_compute_process: 2
+sys:
+  debug:
+    detailed: 1
+    enabled: 1
+    profiler: 0
+  grpc_port: '[::]:50051'
+  restful_port: '5000'
+  mqttbroker_ip: '172.17.0.1'
+  mqttbroker_port: '1883'
+  mqtt_subscribe_topic: '/gate/mqtt'
+work: {}
+multiple:
+  model1:
+    batchsize: 1
+    btype: tensorflow
+    cpcount: 2
+    device:
+    mcode:
+    mhash: 226a7354795692913f24bee21b0cd387-1
+    mpvtk: /tmp/private.pem
+    outlets:
+    - configs: '{"host": "172.17.0.1", "port": 1883, "topic": "/outlet/mqtt", "keepalive": 7200 }'
+      otype: mosquitto
+    - configs: '{}'
+      otype: sync

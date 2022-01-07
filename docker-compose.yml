@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  trueno-ai-serving:
+    image: liyaohong/t-trueno-amd64-tensorflow.cpu-1.13.1:latest
+    container_name: trueno-ai-serving
+    hostname: trueno-ai-serving
+    volumes:
+    - "/jxserving/storage/:/jxserving/storage/"
+    - "/jxserving/config.yaml:/jxserving/config.yaml"
+    working_dir: /jxserving
+    command: ["/usr/bin/python3", "run.py" ,"-c", "config.yaml"]
+    restart: always
+    privileged: true
+    network_mode: "bridge"
+    ports:
+    - 5000:5000/tcp
+    - 50051:50051/tcp
